@@ -1,0 +1,42 @@
+@model List<Item>
+@{
+    ViewData["Title"] = "Мои записи";
+}
+
+<partial name="_CabinetMenu" />
+
+<h1>Мои записи</h1>
+
+<p><a class="btn" asp-controller="Cabinet" asp-action="Create">➕ Добавить книгу</a></p>
+
+@if (Model.Count == 0)
+{
+    <p>У вас пока нет книг. Добавьте первую!</p>
+}
+else
+{
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Год</th>
+                <th>Добавлена</th>
+                <th>Действия</th>
+            </tr>
+            @foreach (Item item in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></td>
+                    <td>@item.Author</td>
+                    <td>@item.Year</td>
+                    <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+                    <td class="actions">
+                        <a class="btn btn-small" asp-controller="Cabinet" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                        <a class="btn btn-small btn-danger" asp-controller="Cabinet" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}

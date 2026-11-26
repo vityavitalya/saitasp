@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Книжная полка</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-inner">
+            <a class="logo" asp-controller="Home" asp-action="Index">📚 Книжная полка</a>
+
+            <nav class="menu">
+                <a asp-controller="Home" asp-action="Index">Главная</a>
+                <a asp-controller="Items" asp-action="Index">Каталог</a>
+                <a asp-controller="Items" asp-action="Authors">Авторы</a>
+                <a asp-controller="Home" asp-action="About">О проекте</a>
+                <a asp-controller="Home" asp-action="Contacts">Контакты</a>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a class="menu-admin" asp-controller="Admin" asp-action="Index">Админка</a>
+                    }
+                    <a class="menu-accent" asp-controller="Cabinet" asp-action="Index">Личный кабинет</a>
+                    <a asp-controller="Account" asp-action="Logout">Выйти</a>
+                    <span class="menu-user">👤 @User.Identity.Name</span>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login">Войти</a>
+                    <a class="menu-accent" asp-controller="Account" asp-action="Register">Регистрация</a>
+                }
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert">@TempData["Success"]</div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            © @DateTime.Now.Year «Книжная полка» — учебный проект на ASP.NET Core MVC + ADO.NET
+        </div>
+    </footer>
+
+</body>
+</html>

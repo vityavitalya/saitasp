@@ -1,0 +1,41 @@
+@model ContactViewModel
+@{
+    ViewData["Title"] = "Контакты";
+}
+
+<h1>Контакты</h1>
+
+<div class="two-columns">
+    <div class="box">
+        <h3>Как с нами связаться</h3>
+        <p>📧 Email: bookshelf@example.com</p>
+        <p>🕑 Отвечаем по будням с 10:00 до 18:00</p>
+        <p>Или напишите через форму — сообщение сохранится в базе, и его прочитает администратор.</p>
+    </div>
+
+    <div class="box">
+        <h3>Обратная связь</h3>
+
+        <form asp-controller="Home" asp-action="Contacts" method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Text"></label>
+                <textarea asp-for="Text" rows="5"></textarea>
+                <span asp-validation-for="Text"></span>
+            </div>
+
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </div>
+</div>

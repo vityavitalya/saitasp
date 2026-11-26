@@ -1,0 +1,30 @@
+@model List<User>
+@{
+    ViewData["Title"] = "Админка — пользователи";
+}
+
+<partial name="_AdminMenu" />
+
+<h1>Пользователи</h1>
+
+<div class="table-wrap">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th>Дата регистрации</th>
+        </tr>
+        @foreach (User user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>@user.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,25 @@
+@model Item
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="box">
+    <h1>@Model.Title</h1>
+
+    <p><b>Автор:</b> @Model.Author</p>
+    <p><b>Год издания:</b> @Model.Year</p>
+
+    <h3>Описание</h3>
+    @if (string.IsNullOrEmpty(Model.Description))
+    {
+        <p class="muted">Описания пока нет.</p>
+    }
+    else
+    {
+        <p class="description">@Model.Description</p>
+    }
+
+    <p class="muted">Добавил(а): @Model.UserName, @Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+</div>
+
+<p><a asp-controller="Items" asp-action="Index">← Вернуться в каталог</a></p>

@@ -1,0 +1,17 @@
+@model Item
+@{
+    ViewData["Title"] = "Удалить книгу";
+}
+
+<partial name="_CabinetMenu" />
+
+<div class="form-box">
+    <h1>Удалить книгу?</h1>
+    <p>Вы точно хотите удалить книгу <b>«@Model.Title»</b> (@Model.Author)?</p>
+    <p class="muted">Это действие нельзя отменить.</p>
+
+    <form asp-controller="Cabinet" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a class="btn btn-light" asp-controller="Cabinet" asp-action="MyItems">Отмена</a>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+@model CabinetViewModel
+@{
+    ViewData["Title"] = "Личный кабинет";
+}
+
+<partial name="_CabinetMenu" />
+
+<div class="box">
+    <h1>Привет, @Model.UserName!</h1>
+    <p>Это ваш личный кабинет. Здесь можно управлять своими книгами и профилем.</p>
+
+    <p class="stat">У вас записей: <b>@Model.ItemsCount</b></p>
+
+    <a class="btn" asp-controller="Cabinet" asp-action="MyItems">Мои записи</a>
+    <a class="btn btn-light" asp-controller="Cabinet" asp-action="Create">Добавить книгу</a>
+</div>

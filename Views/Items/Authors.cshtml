@@ -1,0 +1,23 @@
+@model List<AuthorViewModel>
+@{
+    ViewData["Title"] = "Авторы";
+}
+
+<h1>Авторы</h1>
+<p>Все авторы, чьи книги есть на сайте. Нажмите на имя, чтобы увидеть книги автора.</p>
+
+<div class="table-wrap">
+    <table>
+        <tr>
+            <th>Автор</th>
+            <th>Книг на сайте</th>
+        </tr>
+        @foreach (AuthorViewModel author in Model)
+        {
+            <tr>
+                <td><a asp-controller="Items" asp-action="Index" asp-route-search="@author.Name">@author.Name</a></td>
+                <td>@author.BooksCount</td>
+            </tr>
+        }
+    </table>
+</div>

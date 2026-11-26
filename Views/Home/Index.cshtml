@@ -1,0 +1,33 @@
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<section class="hero">
+    <h1>Добро пожаловать на «Книжную полку»!</h1>
+    <p>
+        Здесь люди делятся книгами, которые им понравились.
+        Смотрите каталог, а после регистрации добавляйте свои книги.
+    </p>
+    <p>Сейчас на сайте книг: <b>@Model.TotalCount</b></p>
+
+    <a class="btn" asp-controller="Items" asp-action="Index">Открыть каталог</a>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-light" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+    }
+</section>
+
+<h2>Новые книги</h2>
+
+<div class="cards">
+    @foreach (Item item in Model.LatestItems)
+    {
+        <div class="card">
+            <h3>@item.Title</h3>
+            <div class="muted">@item.Author, @item.Year г.</div>
+            <p class="card-text">@item.Description</p>
+            <a class="card-link" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">Подробнее →</a>
+        </div>
+    }
+</div>

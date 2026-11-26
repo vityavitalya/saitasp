@@ -1,0 +1,36 @@
+@model List<Item>
+@{
+    ViewData["Title"] = "Админка — все книги";
+}
+
+<partial name="_AdminMenu" />
+
+<h1>Все книги</h1>
+<p>Администратор может удалить любую книгу, даже чужую.</p>
+
+<div class="table-wrap">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Добавил(а)</th>
+            <th></th>
+        </tr>
+        @foreach (Item item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td><a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@item.Author</td>
+                <td>@item.UserName</td>
+                <td>
+                    <form asp-controller="Admin" asp-action="DeleteItem" asp-route-id="@item.Id" method="post"
+                          class="inline-form" onsubmit="return confirm('Точно удалить эту книгу?');">
+                        <button type="submit" class="btn btn-small btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
